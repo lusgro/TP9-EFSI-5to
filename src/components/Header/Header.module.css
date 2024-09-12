@@ -1,0 +1,20 @@
+.header{
+    width: 100%;
+    padding: 20px 15px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid black;
+    background-color: white;
+}
+
+.header img{
+    height: 100%;
+    object-fit: cover;
+    width: auto;
+    border-radius: 100px;
+}
+
+.title{
+    font-family: var(--font-island_moments);
+}
