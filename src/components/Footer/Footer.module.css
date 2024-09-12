@@ -1,0 +1,23 @@
+.title{
+    font-family: var(--font-island-moments);
+    font-size: 50px;
+    color: black;
+}
+
+.footer{
+    background-color: cadetblue;
+    justify-content: center;
+    display: flex;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.footerContact{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}

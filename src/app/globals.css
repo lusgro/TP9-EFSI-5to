@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  font-family: var(--font-geist-sans);
   --background: #ffffff;
   --foreground: #171717;
 }
