@@ -31,10 +31,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${island_moments.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${island_moments.variable} antialiased min-h-screen`}
       >
         <Header />
-        {children}
+        <div className="flex flex-1 flex-col justify-between items-center pt-7">
+          {children}
+        </div>
         <Footer />
       </body>
     </html>

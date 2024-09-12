@@ -1,0 +1,66 @@
+.header{
+    width: 100%;
+    padding: 20px 15px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px -5px 10px 0px rgba(0,0,0,0.54);
+    background-color: white;
+    justify-content: space-between;
+}
+
+.header img{
+    height: 100%;
+    object-fit: cover;
+    width: auto;
+    border-radius: 100px;
+}
+
+.title{
+    font-family: var(--font-island-moments);
+    font-size: 50px;
+    color: black;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.headerIcon{
+    width: 40px;
+    height: 40px;
+    fill: black;
+}
+
+.accountContainer {
+    position: relative;
+}
+
+.logout {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 120%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 1;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+}
+
+.accountContainer:hover .logout {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+}
+
+.accountWrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
