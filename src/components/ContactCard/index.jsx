@@ -27,7 +27,7 @@ export default function ContactCard () {
             <Label htmlFor="name">Name</Label>
             <Input 
               id="name" 
-              placeholder="Your name" 
+              placeholder="Tu name" 
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -38,17 +38,17 @@ export default function ContactCard () {
             <Input 
               id="email" 
               type="email" 
-              placeholder="Your email" 
+              placeholder="Tu email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message">Message</Label>
+            <Label htmlFor="message">Mensaje</Label>
             <Textarea 
               id="message" 
-              placeholder="Your message" 
+              placeholder="Tu mensaje" 
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               required
@@ -56,7 +56,7 @@ export default function ContactCard () {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full">Send Message</Button>
+          <Button type="submit" className="w-full">Enviar Mensaje</Button>
         </CardFooter>
       </form>
     </Card>

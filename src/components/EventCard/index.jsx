@@ -1,24 +1,27 @@
 import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card"
+import Link from "next/link"
 
-export default function EventCard() {
+export default function EventCard({event}) {
   return (
-    <Card className="w-full max-w-sm group hover:scale-105 transition-transform">
-      <CardContent className="p-6 grid gap-4">
-        <div className="grid gap-2">
-          <CardTitle className="text-xl font-semibold">Startup Pitch Night</CardTitle>
-          <CardDescription className="text-muted-foreground">
-            Join us for an evening of inspiring startup pitches and networking.
-          </CardDescription>
-        </div>
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          <CalendarDaysIcon className="w-5 h-5" />
-          <div>
-            <div>Thursday, June 15th</div>
-            <div>6:00 PM - 9:00 PM</div>
+    <Link href={`/detalleEvento/${event.id}`}>
+      <Card className="w-full max-w-sm group hover:scale-105 transition-transform">
+        <CardContent className="p-6 grid gap-4">
+          <div className="grid gap-2">
+            <CardTitle className="text-xl font-semibold">{event.name}</CardTitle>
+            <CardDescription className="text-muted-foreground">
+              {event.description}
+            </CardDescription>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <CalendarDaysIcon className="w-5 h-5" />
+            <div>
+              <div>{event.start_date}</div> {/* cambiarlo para que diga el mes y el dia*/}
+              <div>{event.duration_in_minutes}</div> {/* cambiarlo para que diga desde que hora hasta que hora*/}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   )
 }
 

@@ -1,51 +1,50 @@
 import React from 'react';
 import { Button } from "@/components/ui/button"
 
-export default function EventDetail() {
+export default function EventDetail({event}) {
   return (
     <div className="max-w-4xl mx-auto p-6 sm:p-8 md:p-10">
       <div className="grid gap-8">
         <div>
-          <h1 className="text-3xl font-bold">Enchanted Forest Music Festival</h1>
+          <h1 className="text-3xl font-bold">{event.name}</h1>
           <p className="text-muted-foreground">
-            Experience the magic of nature and music at our annual Enchanted Forest Music Festival. Immerse yourself in
-            the serene forest setting as you enjoy a lineup of talented musicians and performers.
+            {event.description}
           </p>
         </div>
         <div className="grid gap-6">
           <div className="grid gap-2">
             <div className="flex items-center gap-2">
               <TagIcon className="w-5 h-5 text-muted-foreground" />
-              <span className="text-muted-foreground">Music Festival</span>
+              <span className="text-muted-foreground">tags</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPinIcon className="w-5 h-5 text-muted-foreground" />
               <div>
-                <div className="font-medium">Enchanted Forest</div>
-                <div className="text-muted-foreground">123 Woodland Trail, Fairytale, CA 12345</div>
+                <div className="font-medium">{event.event_location.name}</div>
+                <div className="text-muted-foreground">{`${event.event_location.full_address}, ${event.event_location.location.province.full_name}`}</div>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <CalendarIcon className="w-5 h-5 text-muted-foreground" />
               <div>
-                <div className="font-medium">June 15, 2024</div>
-                <div className="text-muted-foreground">12:00 PM - 8:00 PM</div>
+                <div className="font-medium">{event.start_date}</div> {/* cambiarlo para que diga el mes y el dia*/}
+                <div className="text-muted-foreground">{event.duration_in_minutes}</div> {/* cambiarlo para que diga desde que hora hasta que hora*/}
               </div>
             </div>
             <div className="flex items-center gap-2">
               <ClockIcon className="w-5 h-5 text-muted-foreground" />
               <div>
-                <div className="font-medium">8 hours</div>
+                <div className="font-medium">{event.duration_in_minutes}</div> {/* cambiarlo para que diga en horas*/}
               </div>
             </div>
             <div className="flex items-center gap-2">
               <TagIcon className="w-5 h-5 text-muted-foreground" />
               <div>
-                <div className="font-medium">$50</div>
+                <div className="font-medium">{event.price}</div>
               </div>
             </div>
           </div>
-          <Button size="lg">Buy Tickets</Button>
+          <Button size="lg">Comprar Tickets</Button>
         </div>
       </div>
     </div>
