@@ -5,10 +5,10 @@
 }
 
 .footer{
-    background-color: cadetblue;
+    background-color: #707bb5;
     justify-content: center;
     display: flex;
-    padding-top: 60px;
+    padding-top: 40px;
     padding-bottom: 40px;
     position: absolute;
     width: 100%;

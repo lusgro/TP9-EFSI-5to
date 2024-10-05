@@ -5,27 +5,38 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import axios from 'axios'
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 
 export default function RegisterCard() {
+  const router = useRouter()
   const [ user, setUser ] = useState('')
   const [ name, setName ] = useState('')
   const [ last, setLast ] = useState('')
   const [ pass, setPass ] = useState('')
+  const [ error, setError ] = useState()
 
   const registerUser = async () => {
     try {
+      if(!user || !pass || !last || !name) {
+        setError('Hay un campo incompleto.')
+        return
+      }
       const res = await axios.post('http::/localhost:4000/api/user/register', {
         first_name: name,
         last_name: last,
         username: user,
         password: pass
       })
-      if(res) redirect("/login")
+      if(res) router.push('/login')
     }
     catch (e) {
+      setError(e.message)
       console.log(e)
     }
+  }
+
+  const handleClick = () => {
+    router.push('/signup')
   }
 
   return (
@@ -53,12 +64,16 @@ export default function RegisterCard() {
           <Label htmlFor="password">Contraseña</Label>
           <Input name="password" id="password" type="password" placeholder="" value={pass} onKeyUp={(e) => setPass(e.target.value)} required/>
         </div>
+        {
+          error && <p className="text-red-700">{error}</p>
+        }
       </CardContent>
       <CardFooter>
-        <Button type="submit" className="w-full" onSubmit={registerUser}>
+        <Button type="submit" className="w-full" onClick={registerUser}>
           Registrarse
         </Button>
       </CardFooter>
+      <p className="p-6 pt-0 text-center font-bold cursor-pointer" onClick={handleClick}>Ya tengo una cuenta</p>
     </Card>
   )
 }

@@ -4,26 +4,42 @@ import { createContext, useEffect, useState } from "react"
 export const TokenContext = createContext()
 
 export function TokenProvider ({children}) {
-    const [token, setToken] = useState()
+    const [session, setSession] = useState({
+        token: '',
+        username: ''
+    })
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     useEffect(() => {
-        const storedToken = localStorage.getItem('token');
+        const storedToken = JSON.parse(localStorage.getItem('token'));
 
         if(storedToken){
-            setToken(storedToken)
+            setSession(storedToken)
+            setIsLoggedIn(true)
         }
     }, [])
 
     const storageToken = (newToken) => {
-        window.localStorage.setItem('token', newToken)
-        setToken(newToken)
+        window.localStorage.setItem('token', JSON.stringify(newToken))
+        setSession(newToken)
+        setIsLoggedIn(true)
+    }
+
+    const cleanSession = () => {
+        window.localStorage.removeItem('token')
+        setSession({
+            token: '',
+            username: ''
+        })
+        setIsLoggedIn(false)
     }
 
     return (
         <TokenContext.Provider value={{
-            token,
+            session,
             storageToken,
-            isLoggedIn: !!token
+            isLoggedIn: isLoggedIn,
+            cleanSession
         }}>
             {children}
         </TokenContext.Provider>

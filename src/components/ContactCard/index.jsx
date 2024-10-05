@@ -24,10 +24,10 @@ export default function ContactCard () {
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">Nombre</Label>
             <Input 
               id="name" 
-              placeholder="Tu name" 
+              placeholder="Tu nombre" 
               value={name}
               onChange={(e) => setName(e.target.value)}
               required

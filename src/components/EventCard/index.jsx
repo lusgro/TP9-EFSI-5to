@@ -1,5 +1,7 @@
 import { Card, CardContent, CardTitle, CardDescription } from "@/components/ui/card"
+import formatDate from "@/utils/formatDate"
 import Link from "next/link"
+import formatEventTime from "@/utils/formatEventTime"
 
 export default function EventCard({event}) {
   return (
@@ -15,8 +17,8 @@ export default function EventCard({event}) {
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             <CalendarDaysIcon className="w-5 h-5" />
             <div>
-              <div>{event.start_date}</div> {/* cambiarlo para que diga el mes y el dia*/}
-              <div>{event.duration_in_minutes}</div> {/* cambiarlo para que diga desde que hora hasta que hora*/}
+              <div>{formatDate(event.start_date)}</div>
+              <div>{formatEventTime(event.start_date, event.duration_in_minutes)}</div>
             </div>
           </div>
         </CardContent>

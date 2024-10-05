@@ -1,7 +1,16 @@
 import React from 'react';
 import { Button } from "@/components/ui/button"
+import formatDate from "@/utils/formatDate"
+import formatEventTime from '@/utils/formatEventTime';
+
+function formatTags(tags) {
+  if (!tags || !Array.isArray(tags)) return '';
+  
+  return tags.map(tag => tag.name).join(', ');
+}
 
 export default function EventDetail({event}) {
+
   return (
     <div className="max-w-4xl mx-auto p-6 sm:p-8 md:p-10">
       <div className="grid gap-8">
@@ -15,7 +24,7 @@ export default function EventDetail({event}) {
           <div className="grid gap-2">
             <div className="flex items-center gap-2">
               <TagIcon className="w-5 h-5 text-muted-foreground" />
-              <span className="text-muted-foreground">tags</span>
+              <span className="text-muted-foreground">{formatTags(event.tags)}</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPinIcon className="w-5 h-5 text-muted-foreground" />
@@ -27,14 +36,14 @@ export default function EventDetail({event}) {
             <div className="flex items-center gap-2">
               <CalendarIcon className="w-5 h-5 text-muted-foreground" />
               <div>
-                <div className="font-medium">{event.start_date}</div> {/* cambiarlo para que diga el mes y el dia*/}
-                <div className="text-muted-foreground">{event.duration_in_minutes}</div> {/* cambiarlo para que diga desde que hora hasta que hora*/}
+                <div className="font-medium">{formatDate(event.start_date)}</div>
+                <div className="text-muted-foreground">{formatEventTime(event.start_date, event.duration_in_minutes)}</div>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <ClockIcon className="w-5 h-5 text-muted-foreground" />
               <div>
-                <div className="font-medium">{event.duration_in_minutes}</div> {/* cambiarlo para que diga en horas*/}
+                <div className="font-medium"> {event.duration_in_minutes} minutos</div>
               </div>
             </div>
             <div className="flex items-center gap-2">

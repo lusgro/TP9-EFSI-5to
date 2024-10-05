@@ -5,26 +5,42 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import axios from 'axios'
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useLogin } from "@/hooks/useLogin"
 
 export default function LoginCard() {
-  const [user, setUser] = useState()
-  const [pass, setPass] = useState()
+  const router = useRouter();
+  const [ user, setUser ] = useState()
+  const [ pass, setPass ] = useState()
+  const [ error, setError ] = useState()
   const { storageToken } = useLogin()
 
   const loginUser = async () => {
     try {
-      const response = await axios.post('/api/login', {
+      if(!user || !pass) {
+        setError('Hay un campo incompleto.')
+        return
+      }
+      const response = await axios.post('http://localhost:4000/api/user/login', {
         username: user,
         password: pass
       })
-      storageToken(response.data.token)
-      redirect('/')
+      if(response) {
+        storageToken({
+          token: response.data.token,
+          username: user
+        })
+        router.push('/')
+      }
     }
     catch (e) {
+      setError(e.message)
       console.log(e)
     }
+  }
+
+  const handleClick = () => {
+    router.push('/signup')
   }
 
   return (
@@ -36,18 +52,22 @@ export default function LoginCard() {
       <CardContent className="grid gap-4">
         <div className="space-y-2">
           <Label htmlFor="username">Username</Label>
-          <Input id="username" placeholder="" onKeyUp={(e) => setUser(e.target.value)}/>
+          <Input id="username" placeholder="" onKeyUp={(e) => setUser(e.target.value)} required/>
         </div>
         <div className="space-y-2">
           <Label htmlFor="password">Contraseña</Label>
-          <Input id="password" type="password" placeholder="" onKeyUp={(e) => setPass(e.target.value)}/>
+          <Input id="password" type="password" placeholder="" onKeyUp={(e) => setPass(e.target.value)} required/>
         </div>
+        {
+          error && <p className="text-red-700">{error}</p>
+        }
       </CardContent>
       <CardFooter>
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" onClick={loginUser}>
           Iniciar Sesión
         </Button>
       </CardFooter>
+      <p className="p-6 pt-0 text-center font-bold cursor-pointer" onClick={handleClick}>No tengo una cuenta</p>
     </Card>
   )
 }

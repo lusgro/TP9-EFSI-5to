@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import { Island_Moments } from 'next/font/google'
 import Footer from "@/components/Footer";
 import { TokenProvider } from "@/context/token";
+import { ProtectedRoutes } from "@/utils/ProtectedRoutes";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,11 +36,13 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${island_moments.variable} antialiased min-h-screen`}
       >
         <TokenProvider>
-          <Header />
-          <div className="flex flex-1 flex-col justify-between items-center pt-7">
-            {children}
-          </div>
-          <Footer />
+          <ProtectedRoutes>
+            <Header />
+            <div className="flex flex-1 flex-col justify-between items-center pt-7">
+              {children}
+            </div>
+            <Footer />
+          </ProtectedRoutes>
         </TokenProvider>
       </body>
     </html>
